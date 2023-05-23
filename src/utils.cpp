@@ -8,9 +8,14 @@
 
 using namespace std;
 
+bool isNumber(string utf8Value)
+{
+    return utf8Value >= "0030" && utf8Value <= "0039";
+}
+
 bool isAlphaBet(string utf8Value)
 {
-    return utf8Value >= "0041" && utf8Value <= "007A";
+    return (utf8Value >= "0041" && utf8Value <= "005A") || (utf8Value >= "0061" && utf8Value <= "007A");
 };
 
 bool isKoreanJaeum(string utf8Value)
@@ -61,7 +66,7 @@ string koreanCharToUnicodeString(wchar_t koreanChar) // '가' -> 'AC00'
         c = toupper(c);
     }
 
-    if (isAlphaBet(utf8Value))
+    if (isAlphaBet(utf8Value) || isNumber(utf8Value))
     {
         return string(1, decode(utf8Value));
     }
