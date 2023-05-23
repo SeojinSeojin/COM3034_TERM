@@ -32,6 +32,7 @@ int main()
 
     int answerCount = 0;
     int totalCount = 0;
+    int t = 0;
     for (const auto &testCharImage : data.testData)
     {
         totalCount++;
@@ -44,6 +45,12 @@ int main()
         int predictLabel = res.at<float>(0, 0);
         if (predictLabel == testCharImage.targetLabel)
             answerCount++;
+        else if (t++ < 5)
+        {
+            imshow(testCharImage.targetChar, testCharImage.src);
+            cout << t << " : " << testCharImage.targetLabel << " " << predictLabel << endl;
+            waitKey();
+        }
     }
 
     cout << "test completed" << endl;
