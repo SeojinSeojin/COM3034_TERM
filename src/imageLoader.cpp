@@ -20,7 +20,7 @@ public:
     string targetChar;
     int targetLabel;
     Mat src;
-    CharImage(int fontIndex, wchar_t targetChar)
+    CharImage(int fontIndex, wchar_t targetChar, bool useBlur = true)
     {
         string unicodeChar = koreanCharToUnicodeString(targetChar);
         if (unicodeChar.length() > 4 || unicodeChar <= "0020")
@@ -30,12 +30,15 @@ public:
         this->targetChar = unicodeChar;
         this->targetLabel = ALL_TARGET_CHAR.find(targetChar);
         string filename = "resources/images/webFonts/" + unicodeChar + "/" + to_string(fontIndex) + ".jpg";
-        this->src = imread(filename, IMREAD_GRAYSCALE);
-        if (src.empty())
+        Mat tempSrc = imread(filename, IMREAD_GRAYSCALE);
+        if (tempSrc.empty())
         {
             throw runtime_error("failed to read image : " + filename);
         }
-        // medianBlur(src, src, 5);
+        if (useBlur)
+            medianBlur(tempSrc, this->src, 3);
+        else
+            this->src = tempSrc;
     }
 };
 
