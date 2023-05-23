@@ -23,6 +23,10 @@ public:
     CharImage(int fontIndex, wchar_t targetChar)
     {
         string unicodeChar = koreanCharToUnicodeString(targetChar);
+        if (unicodeChar.length() > 4 || unicodeChar <= "0020")
+        {
+            throw runtime_error("failed to read image : " + unicodeChar);
+        }
         this->targetChar = unicodeChar;
         this->targetLabel = ALL_TARGET_CHAR.find(targetChar);
         string filename = "resources/images/webFonts/" + unicodeChar + "/" + to_string(fontIndex) + ".jpg";
