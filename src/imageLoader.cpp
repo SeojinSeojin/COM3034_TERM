@@ -54,7 +54,7 @@ vector<CharImage> getAllCharImage()
 
     for (char targetChar : ALL_TARGET_CHAR)
     {
-        for (int fontIdx = 1; fontIdx < FONT_LENGTH; fontIdx++)
+        for (int fontIdx = 1; fontIdx <= FONT_LENGTH; fontIdx++)
         {
             try
             {
