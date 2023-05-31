@@ -59,7 +59,7 @@ vector<CharImage> getAllCharImage(int charSize)
     vector<CharImage> charImages = {};
 
     int label = 0;
-    for (string targetChar : ALL_CHARS_WITHOUT_JA_MOEUM)
+    for (string targetChar : ALL_CHARS)
     {
         for (int fontIdx = 1; fontIdx <= charSize; fontIdx++)
         {

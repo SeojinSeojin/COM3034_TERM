@@ -48,7 +48,7 @@ int main()
         // else if (t++ < 5)
         // {
         //     imshow(testCharImage.targetChar, testCharImage.src);
-        //     cout << t << " : " << testCharImage.targetLabel << " " << predictLabel << " " << ALL_CHARS_WITHOUT_JA_MOEUM[predictLabel] << endl;
+        //     cout << t << " : " << testCharImage.targetLabel << " " << predictLabel << " " << ALL_CHARS[predictLabel] << endl;
         //     waitKey();
         // }
         if (totalCount % 100 == 0)
