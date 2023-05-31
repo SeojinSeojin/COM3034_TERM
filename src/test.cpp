@@ -15,16 +15,14 @@ int main()
     int cnt = 0;
     for (const auto &trainCharImage : data.trainData)
     {
+
+        cout << trainCharImage << endl;
         if (cnt < 5)
         {
             cnt++;
             imshow(trainCharImage.targetChar, trainCharImage.src);
+            waitKey();
         }
-        else
-        {
-            break;
         }
-    }
-    waitKey();
     return 0;
 }

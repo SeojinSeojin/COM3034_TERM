@@ -45,11 +45,15 @@ int main()
         int predictLabel = res.at<float>(0, 0);
         if (predictLabel == testCharImage.targetLabel)
             answerCount++;
-        else if (t++ < 5)
+        // else if (t++ < 5)
+        // {
+        //     imshow(testCharImage.targetChar, testCharImage.src);
+        //     cout << t << " : " << testCharImage.targetLabel << " " << predictLabel << " " << ALL_CHARS_WITHOUT_JA_MOEUM[predictLabel] << endl;
+        //     waitKey();
+        // }
+        if (totalCount % 100 == 0)
         {
-            imshow(testCharImage.targetChar, testCharImage.src);
-            cout << t << " : " << testCharImage.targetLabel << " " << predictLabel << endl;
-            waitKey();
+            cout << "\t" << totalCount << " accuracy : " << static_cast<double>(answerCount) / totalCount << endl;
         }
     }
 
