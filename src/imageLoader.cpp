@@ -19,7 +19,7 @@ public:
     string targetChar;
     int targetLabel;
     Mat src;
-    CharImage(int fontIndex, int label, string targetChar, bool useBlur = true)
+    CharImage(int fontIndex, int label, string targetChar, bool useBlur = false)
     {
         this->targetChar = targetChar;
         this->targetLabel = label;
