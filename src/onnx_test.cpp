@@ -15,46 +15,49 @@ int main()
     auto duration1 = chrono::duration_cast<chrono::milliseconds>(end_time1 - start_time1);
     cout << "Elapsed time(Data Load): " << duration1.count() << " milliseconds" << endl;
 
-    dnn::Net net = dnn::readNetFromONNX("resources/networks/final_cnn_20_ck.onnx");
+    vector<string> filePaths = {"final_cnn_10.onnx", "final_cnn_20_ck_es_100.onnx", "final_cnn_20_ck_es_dp.onnx", "final_cnn_20.onnx", "init_cnn_10.onnx", "really_init_cnn_10.onnx"};
 
-    int answerCount = 0;
-    int totalCount = 0;
-    auto start_time3 = chrono::high_resolution_clock::now();
-    for (const auto &testCharImage : data.testData)
+    for (const auto &filePath : filePaths)
     {
-        totalCount++;
-        Mat inputBlob = dnn::blobFromImage(testCharImage.src, 1.0, Size(), Scalar(), true, false);
-        net.setInput(inputBlob);
-        Mat output = net.forward();
+        string fullFilePath = "resources/networks/" + filePath;
+        dnn::Net net = dnn::readNetFromONNX(fullFilePath);
+        cout << filePath << " start" << endl;
 
-        Mat scores = output.reshape(1, 1);
-
-        Point classIdPoint;
-        double confidence;
-        minMaxLoc(scores, nullptr, &confidence, nullptr, &classIdPoint);
-
-        int predictLabel = classIdPoint.x;
-        if (predictLabel == testCharImage.targetLabel)
-            answerCount++;
-        else
+        int answerCount = 0;
+        int totalCount = 0;
+        auto start_time3 = chrono::high_resolution_clock::now();
+        for (const auto &testCharImage : data.testData)
         {
-            cout << "predict : " << ALL_CHARS[predictLabel] << " | answer : " << ALL_CHARS[testCharImage.targetLabel] << endl;
+            totalCount++;
+            Mat inputBlob = dnn::blobFromImage(testCharImage.src, 1.0, Size(), Scalar(), true, false);
+            net.setInput(inputBlob);
+            Mat output = net.forward();
+
+            Mat scores = output.reshape(1, 1);
+
+            Point classIdPoint;
+            double confidence;
+            minMaxLoc(scores, nullptr, &confidence, nullptr, &classIdPoint);
+
+            int predictLabel = classIdPoint.x;
+            if (predictLabel == testCharImage.targetLabel)
+                answerCount++;
+            // else
+            // {
+            //     cout << "predict : " << ALL_CHARS[predictLabel] << " | answer : " << ALL_CHARS[testCharImage.targetLabel] << endl;
+            // }
         }
-        if (totalCount % 100 == 0)
-        {
-            cout << "\t" << totalCount << " accuracy : " << static_cast<double>(answerCount) / totalCount << endl;
-        }
+        auto end_time3 = chrono::high_resolution_clock::now();
+        auto duration3 = chrono::duration_cast<chrono::milliseconds>(end_time3 - start_time3);
+        cout << "Elapsed time(Test): " << duration3.count() << " milliseconds" << endl;
+
+        cout << "test completed" << endl;
+        cout << "\t# of correct answer : " << answerCount << endl;
+        cout << "\t# of total test set : " << totalCount << endl;
+
+        double accuracy = static_cast<double>(answerCount) / totalCount;
+        cout << "\taccuracy : " << accuracy << endl;
     }
-    auto end_time3 = chrono::high_resolution_clock::now();
-    auto duration3 = chrono::duration_cast<chrono::milliseconds>(end_time3 - start_time3);
-    cout << "Elapsed time(Test): " << duration3.count() << " milliseconds" << endl;
-
-    cout << "test completed" << endl;
-    cout << "\t# of correct answer : " << answerCount << endl;
-    cout << "\t# of total test set : " << totalCount << endl;
-
-    double accuracy = static_cast<double>(answerCount) / totalCount;
-    cout << "\taccuracy : " << accuracy << endl;
 
     return 0;
 }

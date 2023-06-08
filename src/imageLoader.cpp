@@ -1,13 +1,9 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
-#include <random>
 #include <vector>
-#include <set>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include "utils.cpp"
 #include "allChars.cpp"
 
 using namespace std;
@@ -82,7 +78,7 @@ vector<CharImage> getAllCharImage(int charSize)
     return charImages;
 }
 
-TrainTestData<CharImage> getCharImageData(float trainRatio = 0.9, int charSize = 30)
+TrainTestData<CharImage> getCharImageData(float trainRatio = 0.9, int charSize = 100)
 {
     vector<CharImage> allCharImages = getAllCharImage(charSize);
     vector<CharImage> trainData, testData;

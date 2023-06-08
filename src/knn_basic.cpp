@@ -3,9 +3,9 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include "imageLoader.cpp"
 #include <opencv2/ml.hpp>
 #include <chrono>
+#include "imageLoader.cpp"
 
 using namespace std;
 using namespace cv;
