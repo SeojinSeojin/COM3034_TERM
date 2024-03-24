@@ -11,4 +11,4 @@ For a detailed understanding of the project, [visit here](https://github.com/Seo
 
 |Seojin Kim|Soyeon Jeong|Yujin Ha|
 |--|--|--|
-|[@seojinseojin](github.com/seojinseojin)|[@happysoy](github.com/happysoy)|[@haujinnn](github.com/haujinnn)|
+|[@seojinseojin](https://github.com/SeojinSeojin)|[@happysoy](https://github.com/happysoy)|[@haujinnn](https://github.com/haujinnn)|
